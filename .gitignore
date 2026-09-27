@@ -12,3 +12,4 @@ env/
 /data/processed/
 /models/
 dvc.lock
+xyz.txt
