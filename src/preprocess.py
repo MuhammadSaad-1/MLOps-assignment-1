@@ -13,10 +13,10 @@ def main():
     train_data = np.load('data/raw/train.npz')
     test_data = np.load('data/raw/test.npz')
     
-    x_train_full = train_data['x'].astype('float32') / 255.0
+    x_train_full = train_data['x'].astype('float32') / 128.0
     y_train_full = train_data['y']
     
-    x_test = test_data['x'].astype('float32') / 255.0
+    x_test = test_data['x'].astype('float32') / 128.0
     y_test = test_data['y']
     
     x_train, x_val, y_train, y_val = train_test_split(
