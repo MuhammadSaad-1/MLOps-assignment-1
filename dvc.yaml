@@ -1,0 +1,44 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+      - src/prepare.py
+    outs:
+      - data/raw
+
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - data/raw
+    params:
+      - preprocess.test_size
+      - preprocess.seed
+    outs:
+      - data/processed
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/processed
+    params:
+      - train.dense_units
+      - train.dropout_rate
+      - train.learning_rate
+      - train.epochs
+      - train.batch_size
+    outs:
+      - models
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - data/processed
+      - models
+    outs:
+      - confusion_matrix.png
+    metrics:
+      - metrics.json:
+          cache: false
